@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cosmic Explosions — Logic of Universe</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body data-page="explosions">
+
+  <header class="site-header" id="site-header">
+    <nav class="site-nav" id="site-nav">
+      <a href="../index.html" class="nav-logo" id="nav-logo">Logic of Universe</a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html" class="nav-link" data-page-link="home">Home</a></li>
+        <li><a href="stars.html" class="nav-link" data-page-link="stars">Stars</a></li>
+        <li><a href="stellar-objects.html" class="nav-link" data-page-link="stellar-objects">Stellar Objects</a></li>
+        <li><a href="black-holes.html" class="nav-link" data-page-link="black-holes">Black Holes</a></li>
+        <li><a href="solar-system.html" class="nav-link" data-page-link="solar-system">Solar System</a></li>
+        <li><a href="explosions.html" class="nav-link" data-page-link="explosions">Cosmic Explosions</a></li>
+      </ul>
+      <button class="nav-mobile-toggle" id="nav-mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      <button class="nav-settings-btn" id="nav-settings-btn" aria-label="Settings" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
+    </nav>
+
+    <div class="search-wrapper" id="search-wrapper">
+      <input
+        type="text"
+        class="search-input"
+        id="search-input"
+        placeholder="Search the universe..."
+        autocomplete="off"
+        aria-label="Search"
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        aria-controls="search-results"
+      />
+      <div class="search-suggestions" id="search-suggestions" hidden aria-label="Popular searches"></div>
+      <ul class="search-results" id="search-results" role="listbox" aria-label="Search results" hidden></ul>
+    </div>
+  </header>
+
+  <div class="difficulty-bar" id="difficulty-bar">
+    <span class="difficulty-label">Show level:</span>
+    <div class="difficulty-toggle" id="difficulty-toggle" role="group" aria-label="Content difficulty level"></div>
+  </div>
+
+  <main class="site-main" id="site-main">
+    <div class="page-hero">
+      <h1 class="page-hero__title">Cosmic Explosions</h1>
+      <p class="page-hero__subtitle">Supernovas, kilonovas, hypernovas — the most violent events in the universe.</p>
+    </div>
+    <div class="content-sections" id="content-sections">
+      <!-- JS injects content sections from js/data/explosions-content.js -->
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer">
+    <p class="footer-credits">Imagery and data sourced from <a href="https://api.nasa.gov" class="footer-link" target="_blank" rel="noopener noreferrer">NASA APIs</a>. Educational use only.</p>
+  </footer>
+
+  <noscript>
+    <div class="noscript-banner">JavaScript is required for search and NASA imagery. The page structure is still accessible.</div>
+  </noscript>
+
+  <aside class="settings-panel" id="settings-panel" aria-label="User settings" hidden>
+    <div class="settings-panel__header">
+      <h2 class="settings-panel__title">Settings</h2>
+      <button class="settings-panel__close" id="settings-panel-close" aria-label="Close settings">&#10005;</button>
+    </div>
+    <div class="settings-panel__body" id="settings-panel-body"></div>
+  </aside>
+  <div class="settings-panel__backdrop" id="settings-panel-backdrop" hidden></div>
+
+  <script>window.NASA_API_KEY = "DEMO_KEY";</script>
+  <script src="../config.js"></script>
+  <script src="../js/main.js" type="module"></script>
+</body>
+</html>

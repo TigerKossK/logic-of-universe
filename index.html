@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logic of Universe</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="home">
+
+  <header class="site-header" id="site-header">
+    <nav class="site-nav" id="site-nav">
+      <a href="index.html" class="nav-logo" id="nav-logo">Logic of Universe</a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="pages/stars.html" class="nav-link" data-page-link="stars">Stars</a></li>
+        <li><a href="pages/stellar-objects.html" class="nav-link" data-page-link="stellar-objects">Stellar Objects</a></li>
+        <li><a href="pages/black-holes.html" class="nav-link" data-page-link="black-holes">Black Holes</a></li>
+        <li><a href="pages/solar-system.html" class="nav-link" data-page-link="solar-system">Solar System</a></li>
+        <li><a href="pages/explosions.html" class="nav-link" data-page-link="explosions">Cosmic Explosions</a></li>
+      </ul>
+      <button class="nav-mobile-toggle" id="nav-mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      <button class="nav-settings-btn" id="nav-settings-btn" aria-label="Settings" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
+    </nav>
+
+    <div class="search-wrapper" id="search-wrapper">
+      <input
+        type="text"
+        class="search-input"
+        id="search-input"
+        placeholder="Search the universe..."
+        autocomplete="off"
+        aria-label="Search"
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        aria-controls="search-results"
+      />
+      <div class="search-suggestions" id="search-suggestions" hidden aria-label="Popular searches">
+        <!-- JS populates top suggestion chips -->
+      </div>
+      <ul class="search-results" id="search-results" role="listbox" aria-label="Search results" hidden>
+        <!-- JS populates live search results -->
+      </ul>
+    </div>
+  </header>
+
+  <main class="site-main" id="site-main">
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <div class="hero__content">
+        <h1 class="hero__title">Logic of Universe</h1>
+        <p class="hero__subtitle">Explore the cosmos — from the birth of stars to the edge of existence.</p>
+        <a href="pages/stars.html" class="hero__cta">Start Exploring</a>
+      </div>
+    </section>
+
+    <!-- Universe Stats Counters -->
+    <section id="universe-stats" class="universe-stats">
+      <div class="universe-stats__inner"></div>
+    </section>
+
+    <!-- APOD — Astronomy Picture of the Day -->
+    <section class="apod-section" id="apod-section">
+      <div class="apod-section__header">
+        <h2 class="apod-section__title">Astronomy Picture of the Day</h2>
+        <p class="apod-section__subtitle">Fresh from NASA, every day.</p>
+      </div>
+      <div class="apod-card" id="apod-card" aria-live="polite" aria-busy="true">
+        <div class="apod-card__image-wrap" id="apod-image-wrap">
+          <!-- JS injects <img> or <iframe> for video APODs -->
+          <div class="apod-card__loading" id="apod-loading" aria-label="Loading astronomy picture">
+            <span class="loading-spinner" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="apod-card__info" id="apod-info">
+          <h3 class="apod-card__title" id="apod-title"></h3>
+          <div class="apod-nav" id="apod-nav">
+            <button id="apod-prev-btn" class="apod-nav__btn" aria-label="Previous day">← Previous Day</button>
+            <span id="apod-date"></span>
+            <button id="apod-next-btn" class="apod-nav__btn" aria-label="Next day" disabled>Next Day →</button>
+          </div>
+          <p class="apod-card__explanation" id="apod-explanation"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Topic Cards -->
+    <section class="topics-section" id="topics-section">
+      <h2 class="topics-section__title">Explore Topics</h2>
+      <div class="topics-grid" id="topics-grid">
+
+        <a href="pages/stars.html" class="topic-card" id="topic-card-stars">
+          <div class="topic-card__icon" aria-hidden="true">&#9733;</div>
+          <h3 class="topic-card__title">Stars</h3>
+          <p class="topic-card__desc">How stars are born, how they live, and the spectacular ways they die.</p>
+          <span class="topic-card__arrow" aria-hidden="true">&#8594;</span>
+        </a>
+
+        <a href="pages/stellar-objects.html" class="topic-card" id="topic-card-stellar">
+          <div class="topic-card__icon" aria-hidden="true">&#9901;</div>
+          <h3 class="topic-card__title">Stellar Objects</h3>
+          <p class="topic-card__desc">Pulsars, magnetars, quasars, blazars — the universe's most extreme objects.</p>
+          <span class="topic-card__arrow" aria-hidden="true">&#8594;</span>
+        </a>
+
+        <a href="pages/black-holes.html" class="topic-card" id="topic-card-black-holes">
+          <div class="topic-card__icon" aria-hidden="true">&#9711;</div>
+          <h3 class="topic-card__title">Black Holes</h3>
+          <p class="topic-card__desc">Stellar, supermassive, intermediate, primordial — where space itself breaks down.</p>
+          <span class="topic-card__arrow" aria-hidden="true">&#8594;</span>
+        </a>
+
+        <a href="pages/solar-system.html" class="topic-card topic-card--featured" id="topic-card-solar">
+          <div class="topic-card__icon" aria-hidden="true">&#9737;</div>
+          <h3 class="topic-card__title">Solar System</h3>
+          <p class="topic-card__desc">Click through every planet from Mercury to Neptune. Our cosmic backyard.</p>
+          <span class="topic-card__arrow" aria-hidden="true">&#8594;</span>
+        </a>
+
+        <a href="pages/explosions.html" class="topic-card" id="topic-card-explosions">
+          <div class="topic-card__icon" aria-hidden="true">&#10024;</div>
+          <h3 class="topic-card__title">Cosmic Explosions</h3>
+          <p class="topic-card__desc">Supernovas, kilonovas, hypernovas — the universe's most violent events.</p>
+          <span class="topic-card__arrow" aria-hidden="true">&#8594;</span>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Scroll hint arrow -->
+    <div id="scroll-hint-arrow" class="scroll-hint-arrow" aria-hidden="true">
+      <span class="scroll-hint-arrow__icon">↓</span>
+      <span class="scroll-hint-arrow__label">Timeline of the Universe</span>
+    </div>
+
+    <!-- Timeline of the Universe -->
+    <section id="universe-timeline" class="universe-timeline">
+      <h2 class="universe-timeline__title">Timeline of the Universe</h2>
+      <div id="timeline-container"></div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" id="site-footer">
+    <p class="footer-credits">Imagery and data sourced from <a href="https://api.nasa.gov" class="footer-link" target="_blank" rel="noopener noreferrer">NASA APIs</a>. Educational use only.</p>
+  </footer>
+
+  <noscript>
+    <div class="noscript-banner">
+      JavaScript is required for search, the Solar System explorer, and NASA imagery. The text content is still accessible without it.
+    </div>
+  </noscript>
+
+  <!-- Replace DEMO_KEY with your NASA API key from https://api.nasa.gov -->
+  <aside class="settings-panel" id="settings-panel" aria-label="User settings" hidden>
+    <div class="settings-panel__header">
+      <h2 class="settings-panel__title">Settings</h2>
+      <button class="settings-panel__close" id="settings-panel-close" aria-label="Close settings">&#10005;</button>
+    </div>
+    <div class="settings-panel__body" id="settings-panel-body"></div>
+  </aside>
+  <div class="settings-panel__backdrop" id="settings-panel-backdrop" hidden></div>
+
+  <script>window.NASA_API_KEY = "DEMO_KEY";</script>
+  <script src="config.js"></script>
+  <script src="js/main.js" type="module"></script>
+</body>
+</html>
