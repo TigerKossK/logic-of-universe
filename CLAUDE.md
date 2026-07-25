@@ -75,6 +75,22 @@ User tested the live site and reported 9 issues. Root causes verified against th
 
 ---
 
+## Phase 5 — Cosmic Profile + Live NASA Feed (Active Plan)
+
+Full spec: `C:\Users\KTIK\.claude\plans\well-then-what-about-cryptic-bird.md`. Two interactive features aimed at the teen/adult audience:
+1. **Cosmic Profile calculators** (`pages/solar-system.html`, below the planet grid) — "what would you weigh" + "how old are you" across every Solar System body, with a copy-to-clipboard summary. Reuses `earthComparison.gravityRatio` + `facts.orbitalPeriod` from `js/data/planets.js` (no data-file edits).
+2. **Live NASA Feed** (`index.html`, after APOD) — near-Earth asteroids passing this week via NASA's NeoWs API, using the existing `NASA_API_KEY` and the `nasa.js` fetch/cache/error pattern.
+
+**CODING side (this phase):**
+- New modules `js/modules/cosmic-profile.js`, `js/modules/live-feed.js`; `fetchNearEarthObjects` added to `js/modules/nasa.js`; init calls wired in `js/main.js`; empty mount `<section>`s added to `index.html` (`#live-feed`) and `pages/solar-system.html` (`#cosmic-profile`).
+
+**DESIGN side (Design Claude — CSS only, `css/style.css`):** full class contract + mount points in `DESIGN-HANDOFF-Phase5.md`.
+
+### CODING SIDE STATUS: ✅ COMPLETE — modules built, wired, mounts added
+### DESIGN SIDE STATUS: 🎨 IN PROGRESS — Design Claude applying Phase 5 CSS (sections 44–48 + `--accent-danger` token)
+
+---
+
 ## Role Split (Worktree Mode)
 - **Coding Claude (Logic of Universe)** → CODING & SCRIPTING ONLY. No web design. No CSS. No HTML layout changes. If unsure, use Agent Teams mode to ask.
 - **Design Claude (LogUniverse design)** → WEB DESIGN & CSS ONLY. No JS. No logic. Use WDesignAgent and INTsearch for inspiration and research.

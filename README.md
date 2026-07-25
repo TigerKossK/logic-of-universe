@@ -1,4 +1,3 @@
-I've always found astronomy fascinating but most learning resources are either dry textbooks or scattered YouTube videos with no structure. I wanted one place where you could go from "what is a star" to "how do black holes actually work" at your own pace, with real NASA images instead of stock graphics. Logic of Universe is my attempt at that — a prototype I'm still actively building out.
 # 🌌 Logic of Universe
 
 An interactive, free website that teaches astronomy — from beginner to advanced — through real NASA imagery, quizzes, and a scrollable timeline of the universe.
@@ -10,7 +9,7 @@ An interactive, free website that teaches astronomy — from beginner to advance
 
 ## Why I built this
 
-<!-- Write 2-3 honest sentences here: what problem you ran into, what you wanted instead, and what this project is. See earlier draft for the pattern — problem → desire → solution. -->
+I've always found astronomy fascinating but most learning resources are either dry textbooks or scattered YouTube videos with no structure. I wanted one place where you could go from "what is a star" to "how do black holes actually work" at your own pace, with real NASA images instead of stock graphics. Logic of Universe is my attempt at that — a prototype I'm still actively building out.
 
 ## Features
 
@@ -33,3 +32,16 @@ This site uses ES Modules, so it needs a local server — opening the HTML file 
 
 ```bash
 python -m http.server 8080
+```
+
+Then open `http://localhost:8080` in your browser.
+
+## Status
+
+This is an actively developed prototype. Core content, search, the Solar System Explorer, timeline, quizzes, and glossary are working; visual polish and mobile responsiveness are ongoing.
+
+Contributions, bug reports, and suggestions are welcome — feel free to open an issue.
+
+---
+
+If you find this useful, a ⭐ helps other people discover it.

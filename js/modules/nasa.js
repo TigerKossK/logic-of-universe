@@ -1,7 +1,9 @@
 const IMAGE_API_BASE = 'https://images-api.nasa.gov';
 const APOD_BASE = 'https://api.nasa.gov/planetary/apod';
+const NEO_BASE = 'https://api.nasa.gov/neo/rest/v1/feed';
 const CACHE_PREFIX = 'lou-nasa-';
 const APOD_CACHE_PREFIX = 'lou-apod-';
+const NEO_CACHE_PREFIX = 'lou-neo-';
 const TIMEOUT_MS = 8000;
 const RETRY_DELAY_MS = 1500;
 
@@ -128,6 +130,38 @@ export async function fetchAPOD(apiKey = 'DEMO_KEY', date = null) {
     return data;
   } catch (err) {
     console.warn('APOD fetch failed:', err.message);
+    return { error: 'network' };
+  }
+}
+
+/**
+ * Fetch near-Earth objects (asteroids) for a date range from NASA's NeoWs feed.
+ * The range is inclusive and NeoWs caps it at 7 days. Dates are 'YYYY-MM-DD'.
+ * Cached persistently per date range so the day's feed is fetched once and doesn't
+ * burn the shared DEMO_KEY quota on every homepage visit.
+ * Returns the raw feed object on success, or { error: 'rate-limit' | 'not-found' | 'network' }.
+ */
+export async function fetchNearEarthObjects(apiKey = 'DEMO_KEY', startDate, endDate) {
+  const start = startDate || todayUTC();
+  const end = endDate || start;
+  const cacheKey = `${NEO_CACHE_PREFIX}${start}|${end}`;
+  const cached = readCache(cacheKey);
+  if (cached) return cached;
+
+  try {
+    const url = `${NEO_BASE}?start_date=${encodeURIComponent(start)}&end_date=${encodeURIComponent(end)}&api_key=${encodeURIComponent(apiKey)}`;
+    const res = await fetchWithRetry(url);
+    if (!res.ok) {
+      console.warn(`NeoWs API error ${res.status} — check your NASA_API_KEY`);
+      if (res.status === 429) return { error: 'rate-limit' };
+      if (res.status === 404) return { error: 'not-found' };
+      return { error: 'network', status: res.status };
+    }
+    const data = await res.json();
+    writeCache(cacheKey, data); // only successful responses are cached
+    return data;
+  } catch (err) {
+    console.warn('NeoWs fetch failed:', err.message);
     return { error: 'network' };
   }
 }

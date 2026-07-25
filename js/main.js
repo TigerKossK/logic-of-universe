@@ -7,6 +7,8 @@ import { renderContentPage } from './modules/content-renderer.js';
 import { initTimeline } from './modules/timeline.js';
 import { initSettings } from './modules/settings.js';
 import { initStatsCounter } from './modules/stats-counter.js';
+import { initLiveFeed } from './modules/live-feed.js';
+import { initCosmicProfile } from './modules/cosmic-profile.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const page = document.body.dataset.page;
@@ -33,6 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // replaces the page-level difficulty bar)
   if (page === 'solar-system') {
     initSolarExplorer(document.getElementById('planet-grid'));
+    initCosmicProfile(document.querySelector('#cosmic-profile .cosmic-profile__inner'));
   }
 
   // Homepage gets APOD navigation, timeline, and stat counters
@@ -40,6 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initApodNav();
     initTimeline(document.getElementById('timeline-container'));
     initStatsCounter(document.querySelector('.universe-stats__inner'));
+    initLiveFeed(document.querySelector('#live-feed .live-feed__inner'));
   }
 
   // Back-to-top button (runs on every page)

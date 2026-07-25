@@ -37,6 +37,10 @@
   --topic-solar-system: #38b6ff;
   --topic-explosions:   #e85d4a;
 
+  /* Semantic accents (Phase 5) */
+  --accent-danger:      var(--topic-explosions);
+  --accent-danger-rgb:  232, 93, 74;
+
   /* Text */
   --text-primary:   #e8eaf0;
   --text-secondary: #8d97b4;
@@ -1590,6 +1594,12 @@ body:has(.search-wrapper--hidden) {
   gap: 3px;
   padding: 14px 16px;
   background: var(--color-elevated);
+}
+
+/* Odd number of facts → the lone final cell spans the full width instead of
+   leaving a hollow half-cell showing the darker container background. */
+.facts-list__row:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
 }
 
 .facts-list__label {
@@ -4370,6 +4380,14 @@ body.scrolled .scroll-hint-arrow {
   --text-secondary:  #3a4560;
   --text-muted:      #6b7694;
 
+  /* Gold reads ~1.5:1 on white and fails WCAG wherever it is used as text
+     (level badges, difficulty/Intermediate accent, Cosmic Profile titles +
+     copy button, Stars topic). Darken the *hex* levers to ~4.9:1 on white;
+     --accent-gold-rgb stays bright so the pale gold fills/borders/glows —
+     which read rgba(var(--accent-gold-rgb), …) — remain warm. */
+  --accent-gold:     #8a6d00;
+  --topic-stars:     #8a6d00;
+
   --nav-solid-bg:     rgba(255, 255, 255, 0.92);
   --nav-solid-border: rgba(0, 0, 0, 0.08);
   --bar-bg:           rgba(255, 255, 255, 0.92);
@@ -4485,6 +4503,50 @@ body.scrolled .scroll-hint-arrow {
 
 [data-theme="light"] .timeline-event:hover {
   background: rgba(var(--era-accent-rgb, var(--accent-blue-rgb)), 0.06);
+}
+
+/* Search — input + dropdown surfaces hardcode dark values (rgba(14,17,24,…)
+   backgrounds, white-alpha chips), so they need explicit light treatment;
+   otherwise a dark pill floats on the white header and the suggestion chips
+   turn white-on-white. Only the color declarations are overridden — the base
+   rule keeps supplying background-position / -repeat and the icon SVG geometry. */
+[data-theme="light"] .search-input {
+  background-color: var(--color-surface);
+  border-color: rgba(0, 0, 0, 0.12);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%236b7694' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"] .search-wrapper--expanded .search-input {
+  background-color: #ffffff;
+  border-color: var(--accent-blue);
+  box-shadow:
+    0 0 0 3px rgba(var(--accent-blue-rgb), 0.12),
+    0 8px 28px rgba(var(--accent-blue-rgb), 0.14),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2338b6ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"] .search-suggestions,
+[data-theme="light"] .search-results {
+  box-shadow:
+    0 20px 50px rgba(15, 23, 42, 0.18),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .search-suggestion-chip {
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.10);
+}
+
+[data-theme="light"] .search-suggestion-chip:hover {
+  color: var(--accent-blue);
+  background: rgba(var(--accent-blue-rgb), 0.10);
+  border-color: rgba(var(--accent-blue-rgb), 0.35);
+}
+
+[data-theme="light"] .search-result-item {
+  border-bottom-color: rgba(0, 0, 0, 0.06);
 }
 
 /* =========================================
@@ -5009,4 +5071,597 @@ body.scrolled .scroll-hint-arrow {
   border-radius: 4px;
   white-space: nowrap;
   content: "Copied!";
+}
+
+/* =========================================
+  44. COSMIC PROFILE
+   ========================================= */
+
+.cosmic-profile {
+  padding: var(--section-gap) 28px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.cosmic-profile__inner {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--panel-radius);
+  padding: 40px;
+}
+
+.cosmic-profile__title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cosmic-profile__title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.08), transparent);
+}
+
+.cosmic-profile__subtitle {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  margin-bottom: 28px;
+}
+
+/* --- Form --- */
+.cosmic-profile__form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 24px;
+  margin-bottom: 28px;
+}
+
+.cosmic-profile__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cosmic-profile__label {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+}
+
+.cosmic-profile__input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.cosmic-profile__input {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  background: var(--color-elevated);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 0 16px;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  outline: none;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.cosmic-profile__input::placeholder {
+  color: var(--text-muted);
+}
+
+.cosmic-profile__input:focus-visible,
+.cosmic-profile__input:focus {
+  border-color: var(--active-accent);
+  box-shadow: 0 0 0 3px rgba(var(--active-accent-rgb), 0.15);
+}
+
+/* Unit select — same custom-arrow treatment as .settings-select */
+.cosmic-profile__unit-select {
+  flex-shrink: 0;
+  width: 84px;
+  height: 48px;
+  background: var(--color-elevated);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  padding: 0 26px 0 12px;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  outline: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2355607e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.cosmic-profile__unit-select:focus-visible,
+.cosmic-profile__unit-select:focus {
+  border-color: var(--active-accent);
+  box-shadow: 0 0 0 3px rgba(var(--active-accent-rgb), 0.15);
+}
+
+/* --- Empty state --- */
+.cosmic-profile__empty {
+  text-align: center;
+  padding: 28px 16px;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  font-style: italic;
+  animation: fade-in 250ms ease both;
+}
+
+.cosmic-profile__empty::before {
+  content: '🌠';
+  display: block;
+  font-size: 1.75rem;
+  margin-bottom: 8px;
+  opacity: 0.35;
+  font-style: normal;
+}
+
+/* --- Results --- */
+.cosmic-profile__results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-bottom: 28px;
+  animation: fade-in 350ms ease both;
+}
+
+/* Required: an author-stylesheet class selector setting `display` beats the
+   equal-specificity UA [hidden] rule on source order — same fix already used
+   for .planet-card[hidden] / .planet-panel[hidden] / .settings-panel[hidden] */
+.cosmic-profile__results[hidden] {
+  display: none;
+}
+
+.cosmic-profile__result-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cosmic-profile__result-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--active-accent);
+}
+
+.cosmic-profile__result-group:first-child .cosmic-profile__result-title::before {
+  content: '⚖️ ';
+}
+
+.cosmic-profile__result-group:last-child .cosmic-profile__result-title::before {
+  content: '🎂 ';
+}
+
+.cosmic-profile__rows {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-base);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.cosmic-profile__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 16px;
+  background: var(--color-elevated);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: background var(--transition-fast);
+}
+
+.cosmic-profile__row:last-child {
+  border-bottom: none;
+}
+
+.cosmic-profile__row:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.cosmic-profile__row-body {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.cosmic-profile__row-value {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  transition: color var(--transition-fast);
+}
+
+.cosmic-profile__row:hover .cosmic-profile__row-value {
+  color: var(--active-accent);
+}
+
+/* --- Copy button --- */
+.cosmic-profile__copy-btn {
+  align-self: center;
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--active-accent);
+  background: rgba(var(--active-accent-rgb), 0.1);
+  border: 1px solid rgba(var(--active-accent-rgb), 0.35);
+  border-radius: 24px;
+  padding: 10px 26px;
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.cosmic-profile__copy-btn:hover {
+  background: rgba(var(--active-accent-rgb), 0.18);
+  border-color: var(--active-accent);
+  box-shadow: 0 0 20px rgba(var(--active-accent-rgb), 0.2);
+  transform: translateY(-1px);
+}
+
+.cosmic-profile__copy-btn:focus-visible {
+  outline: 2px solid var(--active-accent);
+  outline-offset: 2px;
+}
+
+.cosmic-profile__copy-btn--copied {
+  color: var(--topic-stellar) !important;
+  background: rgba(62, 207, 142, 0.1) !important;
+  border-color: rgba(62, 207, 142, 0.35) !important;
+  animation: copy-success-pulse 320ms ease;
+}
+
+@keyframes copy-success-pulse {
+  0%   { transform: scale(0.96); }
+  60%  { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+/* =========================================
+  45. LIVE NASA FEED
+   ========================================= */
+
+.live-feed {
+  padding: var(--section-gap) 28px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  animation: section-reveal 600ms ease-out both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 30%;
+}
+
+@supports not (animation-timeline: view()) {
+  .live-feed { animation: none; }
+}
+
+.live-feed__title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.live-feed__title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.08), transparent);
+}
+
+.live-feed__subtitle {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  margin-bottom: 32px;
+}
+
+/* --- Loading state --- */
+.live-feed__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+/* --- Card grid --- */
+.live-feed__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+/* --- Card --- */
+.live-feed__card {
+  --feed-accent: var(--topic-solar-system);
+  --feed-accent-rgb: var(--accent-blue-rgb);
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--card-radius);
+  padding: 22px 22px 20px;
+  overflow: hidden;
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
+  animation: section-reveal 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.live-feed__card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 3px 0 0 3px;
+  background: var(--feed-accent);
+}
+
+.live-feed__card:nth-child(1) { animation-delay: 0ms;   }
+.live-feed__card:nth-child(2) { animation-delay: 60ms;  }
+.live-feed__card:nth-child(3) { animation-delay: 120ms; }
+.live-feed__card:nth-child(4) { animation-delay: 180ms; }
+.live-feed__card:nth-child(5) { animation-delay: 240ms; }
+
+.live-feed__card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(var(--feed-accent-rgb), 0.22);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(var(--feed-accent-rgb), 0.1);
+}
+
+/* Hazardous variant — steady glow, no pulsing/blinking on purpose */
+.live-feed__card--hazardous {
+  --feed-accent: var(--accent-danger);
+  --feed-accent-rgb: var(--accent-danger-rgb);
+  box-shadow: 0 0 32px rgba(var(--accent-danger-rgb), 0.08);
+}
+
+.live-feed__card--hazardous:hover {
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.5),
+    0 0 36px rgba(var(--accent-danger-rgb), 0.16);
+}
+
+.live-feed__card-name {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.live-feed__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-heading);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-danger);
+  background: rgba(var(--accent-danger-rgb), 0.12);
+  border: 1px solid rgba(var(--accent-danger-rgb), 0.3);
+  border-radius: 20px;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
+.live-feed__badge::before {
+  content: '⚠';
+  font-size: 0.75rem;
+}
+
+/* --- Stats grid --- */
+.live-feed__stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 16px;
+}
+
+.live-feed__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.live-feed__stat-label {
+  font-family: var(--font-heading);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+}
+
+.live-feed__stat-value {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Notice / fallback state --- */
+.live-feed__notice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 140px;
+  background: var(--color-elevated);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 28px 20px;
+  text-align: center;
+  color: var(--text-muted);
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+}
+
+.live-feed__notice::before {
+  content: '☄️';
+  font-size: 1.75rem;
+  opacity: 0.35;
+}
+
+/* =========================================
+  46. PHASE 5 RESPONSIVE
+   ========================================= */
+
+@media (max-width: 768px) {
+  .cosmic-profile__inner {
+    padding: 28px 24px;
+  }
+
+  .cosmic-profile__form,
+  .cosmic-profile__results {
+    grid-template-columns: 1fr;
+  }
+
+  .live-feed__stats {
+    gap: 10px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cosmic-profile {
+    padding: var(--section-gap) 16px;
+  }
+
+  .cosmic-profile__inner {
+    padding: 24px 18px;
+  }
+
+  .cosmic-profile__input-group {
+    flex-wrap: wrap;
+  }
+
+  .cosmic-profile__unit-select {
+    width: 100%;
+  }
+
+  .cosmic-profile__copy-btn {
+    width: 100%;
+  }
+
+  .live-feed {
+    padding: var(--section-gap) 16px;
+  }
+
+  .live-feed__list {
+    grid-template-columns: 1fr;
+  }
+
+  .live-feed__stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+  47. PHASE 5 REDUCED MOTION
+   ========================================= */
+@media (prefers-reduced-motion: reduce) {
+  .cosmic-profile__empty,
+  .cosmic-profile__results {
+    animation: none !important;
+  }
+
+  .cosmic-profile__copy-btn--copied {
+    animation: none !important;
+  }
+
+  .cosmic-profile__copy-btn:hover {
+    transform: none !important;
+  }
+
+  .live-feed {
+    animation: none !important;
+  }
+
+  .live-feed__card {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .live-feed__card:hover {
+    transform: none !important;
+  }
+}
+
+/* =========================================
+  48. PHASE 5 LIGHT THEME
+   ========================================= */
+
+[data-theme="light"] .cosmic-profile__inner,
+[data-theme="light"] .live-feed__card {
+  border-color: rgba(0, 0, 0, 0.07);
+}
+
+[data-theme="light"] .cosmic-profile__input,
+[data-theme="light"] .cosmic-profile__unit-select {
+  background: var(--color-surface);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .cosmic-profile__rows,
+[data-theme="light"] .live-feed__notice {
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .cosmic-profile__row {
+  background: var(--color-surface);
+  border-bottom-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .cosmic-profile__row:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="light"] .live-feed__card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08), 0 0 24px rgba(var(--feed-accent-rgb), 0.12);
 }
