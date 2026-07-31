@@ -42,6 +42,10 @@ This is an actively developed prototype. Core content, search, the Solar System 
 
 Contributions, bug reports, and suggestions are welcome — feel free to open an issue.
 
+## License
+
+Released under the [MIT License](LICENSE) — free to use, modify, and share, just keep the copyright notice.
+
 ---
 
 If you find this useful, a ⭐ helps other people discover it.
