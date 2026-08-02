@@ -11,30 +11,26 @@ An interactive, free website that teaches astronomy — from beginner to advance
 ## 📸 Screenshots
 
 ### Home Page
-![Home](assets/screenshots/Home.png)
+![Home](assets/ScreenShots/Home.png)
 
 ### Solar System Explorer
-![SolarSystem](assets/screenshots/SolarSystem.png)
+![SolarSystem](assets/ScreenShots/SolarSystem.png)
 
 ### Timeline of the Universe
-![Timeline](assets/screenshots/Timeline.png)
+![Timeline](assets/ScreenShots/Timeline.png)
 
 ### Quiz mode
-![Quiz](assets/screenshots/Quiz.png)
+![Quiz](assets/ScreenShots/Quiz.png)
 
 ### Topics
-![Topics](assets/screenshots/Topics.png)
+![Topics](assets/ScreenShots/Topics.png)
 
 ### Today's Events
-![Events](assets/screenshots/Events.png)
+![Events](assets/ScreenShots/Events.png)
 
 ### Search Box
-![SearchBox](assets/screenshots/SearchBox.png)
+![SearchBox](assets/ScreenShots/SearchBox.png)
 
-
-
-<!-- Add a screenshot or GIF here — e.g. the timeline scrolling or the quiz in action -->
-<!-- ![Logic of Universe screenshot](assets/screenshot.png) -->
 
 ## Why I built this
 
