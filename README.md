@@ -4,6 +4,35 @@ An interactive, free website that teaches astronomy — from beginner to advance
 
 🔗 **Live demo:** https://tigerkossk.github.io/logic-of-universe/
 
+## 🎥 Demo
+
+![Logic of Universe Demo](assets/demo/demo.gif)
+
+## 📸 Screenshots
+
+### Home Page
+![Home](assets/screenshots/Home.png)
+
+### Solar System Explorer
+![SolarSystem](assets/screenshots/SolarSystem.png)
+
+### Timeline of the Universe
+![Timeline](assets/screenshots/Timeline.png)
+
+### Quiz mode
+![Quiz](assets/screenshots/Quiz.png)
+
+### Topics
+![Topics](assets/screenshots/Topics.png)
+
+### Today's Events
+![Events](assets/screenshots/Events.png)
+
+### Search Box
+![SearchBox](assets/screenshots/SearchBox.png)
+
+
+
 <!-- Add a screenshot or GIF here — e.g. the timeline scrolling or the quiz in action -->
 <!-- ![Logic of Universe screenshot](assets/screenshot.png) -->
 
