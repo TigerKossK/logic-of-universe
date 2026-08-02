@@ -14,7 +14,7 @@ An interactive, free website that teaches astronomy — from beginner to advance
 ![Home](assets/ScreenShots/Home.png)
 
 ### Solar System Explorer
-![Solar System](assets/ScreenShots/SolarSystem.png)
+![SolarSystem](assets/ScreenShots/SolarSystem.png)
 
 ### Timeline of the Universe
 ![Timeline](assets/ScreenShots/Timeline.png)
